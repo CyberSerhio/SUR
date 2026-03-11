@@ -1,6 +1,5 @@
-from database.models.news import news
 from setting import engine, metadata
-
+import database.models
 
 async def migrate() -> None:
     """При вызове создаёт таблици в БД."""
