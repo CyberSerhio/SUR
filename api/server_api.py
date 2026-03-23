@@ -1,12 +1,17 @@
 from fastapi import APIRouter
-from sqlalchemy.orm.session import Session
 
-from database.db_getter import get_news
+from service.db_service import DbService
 
 router = APIRouter()
-
+db_service = DbService()
 
 @router.get("/")
 async def root():
-    news = await get_news()
+    news = await db_service.all('news')
+    return news
+
+
+@router.get("/news")
+async def root(title: str):
+    news = await db_service.find_by('news', "title", title)
     return news
