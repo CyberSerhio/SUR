@@ -4,3 +4,4 @@ class CreateUserQuery(BaseModel):
     username: str
     email: str
     phone: str
+    man: bool

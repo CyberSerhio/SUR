@@ -26,6 +26,10 @@ async def create(data: CreateUserQuery):
     return answer
 
 @user_router.post("/delete")
-async def create(user_id: int):
-    answer = await delete_user(user_id)
-    return answer
+async def delete(user_id: int):
+    try:
+        user_id = int(user_id)
+        answer = await delete_user(user_id)
+        return answer
+    except ValueError:
+        return {"message": "Invalid user id"}

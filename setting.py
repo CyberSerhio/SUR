@@ -1,4 +1,4 @@
-from os import getenv
+from os import getenv, getcwd
 from dotenv import load_dotenv
 from sqlalchemy.ext.asyncio import create_async_engine
 from sqlalchemy.ext.asyncio.session import AsyncSession
@@ -6,6 +6,8 @@ from sqlalchemy.orm.session import sessionmaker
 from sqlalchemy.sql.schema import MetaData
 
 load_dotenv()
+
+DEF_PATH = getcwd()
 
 engine = create_async_engine(getenv("DATABASE_URL"), echo=True)
 metadata = MetaData()

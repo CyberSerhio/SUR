@@ -1,5 +1,3 @@
-from xxlimited_35 import Null
-
 from sqlalchemy.sql.expression import select, delete
 from sqlalchemy import insert, update
 from setting import SessionLocal
@@ -38,6 +36,12 @@ class DbService:
                                         if value else insert(table).returning(table))
             await session.commit()
             return res.mappings().all()
+
+    async def create_all(self, table: str, value: list = None):
+        table = self.check_table(table)
+        async with SessionLocal() as session:
+            await session.execute(insert(table).values(value))
+            await session.commit()
 
     async def update(self, table: str, where: dict, value: dict):
         table = self.check_table(table)
